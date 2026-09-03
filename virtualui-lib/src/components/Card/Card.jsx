@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Card({
+export const Card = ({
   title = "Card title",
   description = "This is a short description of the card content.",
   imageUrl = "https://via.placeholder.com/300x160",
@@ -8,7 +8,7 @@ export default function Card({
   textColor = "#111827",
   accentColor = "#4F46E5",
   width = "300px",
-}) {
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const cardStyle = {
@@ -74,4 +74,4 @@ export default function Card({
       </div>
     </div>
   );
-}
+};

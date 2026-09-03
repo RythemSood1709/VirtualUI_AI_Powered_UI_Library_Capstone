@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Button({
+export const Button = ({
   text = "Click me",
   onClick = () => {},
   bgColor = "#4F46E5",
@@ -8,7 +8,7 @@ export default function Button({
   textColor = "#FFFFFF",
   size = "medium",
   disabled = false,
-}) {
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const sizeStyles = {
@@ -40,4 +40,4 @@ export default function Button({
       {text}
     </button>
   );
-}
+};
