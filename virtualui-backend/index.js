@@ -6,9 +6,16 @@ dotenv.config();
 
 const app = express()
 
+app.use(express.json())
+app.use(cookieParser())
+
+
 app.get("/", (req,res)=>{
     res.json("Hello from server")
 })
+
+app.use("/api/auth", authRouter)
+
 const PORT = process.env.PORT 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
