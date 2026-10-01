@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { TbX } from "react-icons/tb";
 
@@ -36,6 +37,17 @@ const steps = [
 import { SiValorant } from "react-icons/si";
 
 const Auth = ({ onClose }) => {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(
+      () => setActive((prev) => (prev + 1) % steps.length),
+      2400,
+    );
+
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <AnimatePresence>
       <motion.div
@@ -86,6 +98,38 @@ const Auth = ({ onClose }) => {
             <p className="text-[10px] font-semibold tracking-[3px] text-[#3be8ff]  uppercase mb-4 sm:mb-5">
               How it Works
             </p>
+            <div className="flex sm:flex-col gap-2 sm:gap-1 overflow-x-auto sm:overflow-x-visible pb-2 sm:pb-0 -mx-1 px-1">
+              {steps.map((item, i) => (
+                <motion.div
+                  key={i}
+                  className={`shrink-0 sm:shrink flex items-start gap-3 px-3 py-2.5 rounded-xl border transition-all duration-300 min-w-[200px] sm:min-w-0 ${active === i ? "bg-[#3be8ff]/[0.07] border-[#3be8ff]/20" : "bg-transparent border-transparent"}`}
+                >
+                  <div
+                    className={`min-w-[28px] h-7 rounded-lg flex items-center justify-center border transition-all duration-300 ${active === i ? "bg-gradient-to-br from-[#3be8ff] to-[#0ab8d6] border-transparent" : "bg-[#3be8ff]/[0.08] border-[#3be8ff]/20"}`}
+                  >
+                    <item.icon
+                      size={13}
+                      color={active === i ? "#051c20" : "#3be8ff"}
+                    />
+                  </div>
+
+                  <div>
+                    <p
+                      className={`text-[12.5px] font-semibold transition-colors duration-300 whitespace-nowrap sm:whitespace-normal ${active === i ? "text-[#d4f5fa]" : "text-white/55"}`}
+                    >
+                      {item.title}
+                    </p>
+                    <div
+                      className={`overflow-hidden transition-all duration-500 ${active === i ? "max-h-8 opacity-100 mt-0.5" : "max-h-0 opacity-0"}`}
+                    >
+                      <p className="text-[11px] text-[#3be8ff]/40 leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           {/*right box*/}
