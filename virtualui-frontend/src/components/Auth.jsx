@@ -1,10 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, easeInOut, motion } from "motion/react";
 import { TbX } from "react-icons/tb";
 
 import { TbLogin2, TbSettings, TbCopy, TbDownload } from "react-icons/tb";
 import { HiSparkles } from "react-icons/hi";
+import { FcGoogle } from "react-icons/fc";
 
 const steps = [
   {
@@ -133,7 +134,62 @@ const Auth = ({ onClose }) => {
           </div>
 
           {/*right box*/}
-          <motion.div></motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 2 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0 }}
+            className="sm:w-[48%] bg-[#040f12] px-6 sm:px-10 py-8 sm:py-12 flex flex-col justify-center items-center relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(59,232,255,0.025)_1px,transparent_1px) bg-size-[32px_32px]" />
+
+            <div className="relative z-10 w-ful max-w-70 sm:max-w-65 text-center mx_auto">
+              <motion.div
+                animate={{ y: [0, -5, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: easeInOut }}
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl mx-auto mb-5 sm:mb-6 bg-gradient-to-br from-[#3be8ff]/15 to-[#040f12] border border-[#3be8ff]/20 flex items-center justify-center"
+              >
+                <SiValorant size={22} color="#3be8ff" />
+              </motion.div>
+              <h3
+                style={{ fontFamily: "'Syne', sans-serif" }}
+                className="text-xl font-bold text-[#e4f6f8] tracking-tight mb-2"
+              >
+                Welcome
+              </h3>
+              <p className="text-[13px] text-[#96bec8]/55 leading-relaxed mb-6 sm:mb-7">
+                Sign in to generate AI powered UI components in seconds
+              </p>
+              <div className="flex justify-center gap-4 sm:gap-5 mb-6 sm:mb-7">
+                {[
+                  ["150", "AI Credits"],
+                  ["∞", "Components"],
+                  ["JSX", "Ready"],
+                ].map(([v, l], i) => (
+                  <div key={i} className="text-center">
+                    <div className="text-base font-bold text-[#3be8ff]">
+                      {v}
+                    </div>
+                    <div className="text-[9px] text-[#78aab4]/45 uppercase tracking-wider font-medium">
+                      {l}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <motion.button
+                whileHover={{ y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full flex items-center justify-center gap-2.5 py-3.5 rounded-xl bg-white text-[#0a1a1d] font-semibold text-sm cursor-pointer border-none shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:shadow-[0_12px_40px_rgba(59,232,255,0.2)] transition-shadow"
+              >
+                <FcGoogle size={20} /> Continue with Google
+              </motion.button>
+              <p className="text-[11px] text-[#64919b]/45 mt-4 sm:mt-5">
+                No account needed for npm.{" "}
+                <span onClick={onClose} className="text-[#3be8ff]/50 border-b border-[#3be8ff]/20 cursor-pointer hover:text-[#3be8ff]/80 transition-colors">
+                  View Docs →
+                </span>{" "}
+              </p>
+            </div>
+          </motion.div>
         </motion.div>
       </motion.div>
     </AnimatePresence>
