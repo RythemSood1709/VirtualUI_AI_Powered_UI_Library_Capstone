@@ -1,4 +1,6 @@
 import User from "../models/user.model.js";
+import { genToken } from "../config/token.js";
+
 
 
 export const googleAuth = async (req, res) => {
@@ -18,7 +20,8 @@ export const googleAuth = async (req, res) => {
         return res.status(200).json(user)
 
     } catch (error) {
-        return res.status(500).json({message:'Google Auth error  ${error}'})
+        console.error("Google Auth Backend Error:", error);
+        return res.status(500).json({message:'Google Auth error  ${error.message}'})
     }
 }
 
